@@ -1,0 +1,207 @@
+-- Customer spending and balance metrics by age
+
+WITH spending_behavior AS (
+	SELECT 
+		customer_id,
+		monthly_spending,
+        monthly_transactions,
+        monthly_spending / NULLIF(monthly_transactions, 0) AS avg_transaction_amount
+	FROM ccc_behavior
+)
+
+SELECT 
+    COUNT(i.age) AS num_in_age,
+    i.age,
+    ROUND(AVG(b.outstanding_balance), 2) AS avg_balance, 
+    ROUND(AVG(b.statement_balance), 2) AS avg_statement_balance,
+    ROUND(AVG(sb.monthly_spending), 2) AS avg_monthly_spending,
+    ROUND(AVG(sb.monthly_transactions), 2) AS avg_monthly_transactions,
+    ROUND(AVG(sb.avg_transaction_amount), 2) AS avg_tansaction_amount
+FROM ccc_balance b
+JOIN ccc_info i
+	ON b.customer_id = i.customer_id
+JOIN spending_behavior sb
+	ON i.customer_id = sb.customer_id
+GROUP BY i.age 
+ORDER BY i.age ASC
+
+-- Looking for card popularity for people under 50 and over 50
+
+SELECT
+    CASE
+        WHEN i.age < 50 THEN 'Under 50'
+        ELSE '50 and Over'
+    END AS age_group,
+    t.card_type,
+    COUNT(*) AS number_of_customers,
+    ROW_NUMBER() OVER (
+        PARTITION BY 
+            CASE
+                WHEN i.age < 50 THEN 'Under 50'
+                ELSE '50 and Over'
+            END
+        ORDER BY COUNT(*) DESC
+    ) AS card_popularity
+FROM ccc_type t
+JOIN ccc_info i
+    ON t.customer_id = i.customer_id
+GROUP BY
+    CASE
+        WHEN i.age < 50 THEN 'Under 50'
+        ELSE '50 and Over'
+    END,
+    t.card_type
+ORDER BY age_group, card_popularity;
+
+-- Do customers with higher monthly spending have higher outstanding credit card balances
+
+WITH spending_behavior AS (
+	SELECT 
+		customer_id,
+		monthly_spending,
+		CASE 
+			WHEN monthly_spending < 1000 THEN 'Low Spender'
+			WHEN monthly_spending BETWEEN 1000 AND 3000 THEN 'Medium Spender'
+            ELSE 'High Spender'
+		END AS spending_category 
+	FROM ccc_behavior
+)
+
+SELECT 
+    s.spending_category,
+    COUNT(DISTINCT i.customer_id) AS customer_count,
+    ROUND(AVG(b.outstanding_balance), 2) AS avg_outstanding_balance, 
+    ROUND(AVG(b.statement_balance), 2) AS avg_statement_balance
+FROM spending_behavior s
+JOIN ccc_info i
+	ON s.customer_id = i.customer_id
+JOIN ccc_balance b
+	ON i.customer_id = b.customer_id
+GROUP BY s.spending_category
+ORDER BY avg_outstanding_balance DESC
+
+-- How does essential vs. nonessential spending vary across different customer age groups?
+
+WITH customer_spending AS (
+	SELECT 
+		customer_id,
+		grocery_spending +
+        fuel_spending +
+        utility_spending AS essential_spending,
+        
+        online_shopping +
+        dining_spending +
+        travel_spending +
+        entertainment_spending AS nonessential_spending,
+        
+		grocery_spending +
+        fuel_spending +
+        utility_spending +
+        online_shopping +
+        dining_spending +
+        travel_spending +
+        entertainment_spending AS total_spending
+	FROM ccc_behavior
+	)
+    
+SELECT 
+	i.age,
+	ROUND(AVG(c.essential_spending), 2) AS avg_essential_spending,
+	ROUND(AVG(c.nonessential_spending), 2) AS avg_nonessential_spending,
+	ROUND(AVG(c.total_spending), 2) AS avg_customer_spending
+FROM customer_spending c
+JOIN ccc_info i
+	ON c.customer_id = i.customer_id
+GROUP BY i.age
+ORDER BY i.age
+    
+    -- The percentage of essintial vs nonessential spending
+    
+WITH spending AS (
+    SELECT
+        customer_id,
+        grocery_spending +
+        fuel_spending +
+        utility_spending AS essential_spending,
+        
+        online_shopping +
+        dining_spending +
+        travel_spending +
+        entertainment_spending AS nonessential_spending
+    FROM ccc_behavior
+)
+
+SELECT
+    ROUND(SUM(essential_spending), 2) AS total_essential_spending,
+    ROUND(SUM(nonessential_spending), 2) AS total_nonessential_spending,
+    ROUND(
+        SUM(essential_spending) /
+        NULLIF(SUM(essential_spending + nonessential_spending), 0) * 100,
+        2
+    ) AS essential_percentage,
+    ROUND(
+        SUM(nonessential_spending) /
+        NULLIF(SUM(essential_spending + nonessential_spending), 0) * 100,
+        2
+    ) AS nonessential_percentage
+FROM spending;
+    
+    -- Customer credit utilization 
+    
+SELECT
+    i.customer_id,
+    i.first_name,
+    i.last_name,
+    t.card_type,
+    t.credit_limit,
+    b.outstanding_balance,
+    ROUND(
+        b.outstanding_balance / NULLIF(t.credit_limit, 0) * 100,
+        2
+    ) AS credit_utilization
+FROM ccc_info i
+JOIN ccc_type t
+    ON i.customer_id = t.customer_id
+JOIN ccc_balance b
+    ON i.customer_id = b.customer_id
+ORDER BY credit_utilization DESC;
+
+-- High spending customers but low payments 
+
+SELECT
+    i.customer_id,
+    i.first_name,
+    i.last_name,
+    cb.monthly_spending,
+    b.payment_amount
+FROM ccc_info i
+JOIN ccc_behavior cb
+    ON i.customer_id = cb.customer_id
+JOIN ccc_balance b
+    ON i.customer_id = b.customer_id
+WHERE cb.monthly_spending > (
+    SELECT AVG(monthly_spending)
+    FROM ccc_behavior
+)
+AND b.payment_amount < (
+    SELECT AVG(payment_amount)
+    FROM ccc_balance
+)
+ORDER BY cb.monthly_spending DESC;
+
+-- Ranking customers by spending within their age groups
+
+SELECT
+    i.age,
+    i.customer_id,
+    i.first_name,
+    i.last_name,
+    b.monthly_spending,
+    RANK() OVER (
+        PARTITION BY i.age
+        ORDER BY b.monthly_spending DESC
+    ) AS spending_rank
+FROM ccc_info i
+JOIN ccc_behavior b
+    ON i.customer_id = b.customer_id
+ORDER BY i.age, spending_rank;
