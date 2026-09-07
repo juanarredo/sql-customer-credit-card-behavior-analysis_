@@ -1,13 +1,12 @@
-# [Project Title]
-> *One sentence. What did you analyze, build, or solve - and why does it matter?*
+# [Customer credit card behavior analysis]
+  This is my first SQL project. I created the schema with synthetic credit card information to practice what I've learned up to this point.  
 
 ---
 
 ## ⚙️ Project Type Flags
-> *Check what applies. This helps reviewers and collaborators understand the nature of the work at a glance. Delete this block before publishing.*
 
 - [ ] Exploratory Data Analysis (EDA)
-- [ ] SQL Analysis / Querying
+- [x] SQL Analysis / Querying
 - [ ] Dashboard / Data Visualization
 - [ ] Data Pipeline / ETL
 - [ ] Predictive Modelling / Machine Learning
