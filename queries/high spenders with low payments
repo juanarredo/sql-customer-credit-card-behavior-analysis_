@@ -1,0 +1,22 @@
+-- High spending customers but low payments 
+
+SELECT
+    i.customer_id,
+    i.first_name,
+    i.last_name,
+    cb.monthly_spending,
+    b.payment_amount
+FROM ccc_info i
+JOIN ccc_behavior cb
+    ON i.customer_id = cb.customer_id
+JOIN ccc_balance b
+    ON i.customer_id = b.customer_id
+WHERE cb.monthly_spending > (
+    SELECT AVG(monthly_spending)
+    FROM ccc_behavior
+)
+AND b.payment_amount < (
+    SELECT AVG(payment_amount)
+    FROM ccc_balance
+)
+ORDER BY cb.monthly_spending DESC;
