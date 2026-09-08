@@ -1,0 +1,34 @@
+-- How does essential vs. nonessential spending vary across different customer age groups?
+
+WITH customer_spending AS (
+	SELECT 
+		customer_id,
+		grocery_spending +
+        fuel_spending +
+        utility_spending AS essential_spending,
+        
+        online_shopping +
+        dining_spending +
+        travel_spending +
+        entertainment_spending AS nonessential_spending,
+        
+		grocery_spending +
+        fuel_spending +
+        utility_spending +
+        online_shopping +
+        dining_spending +
+        travel_spending +
+        entertainment_spending AS total_spending
+	FROM ccc_behavior
+	)
+    
+SELECT 
+	i.age,
+	ROUND(AVG(c.essential_spending), 2) AS avg_essential_spending,
+	ROUND(AVG(c.nonessential_spending), 2) AS avg_nonessential_spending,
+	ROUND(AVG(c.total_spending), 2) AS avg_customer_spending
+FROM customer_spending c
+JOIN ccc_info i
+	ON c.customer_id = i.customer_id
+GROUP BY i.age
+ORDER BY i.age
