@@ -5,14 +5,7 @@
 
 ## ⚙️ Project Type Flags
 
-- [ ] Exploratory Data Analysis (EDA)
 - [x] SQL Analysis / Querying
-- [ ] Dashboard / Data Visualization
-- [ ] Data Pipeline / ETL
-- [ ] Predictive Modelling / Machine Learning
-- [ ] Data Cleaning / Wrangling
-- [ ] End-to-End (multiple of the above)
-- [ ] Other: ___________
 
 ---
 
@@ -144,36 +137,9 @@
 
 ---
 
-## 7. ERD - Entity Relationship Diagram
 
+## Analysis & Metrics
 ---
-
-Mermaid Diagram
-```mermaid
-<img width="697" height="869" alt="ccc sql" src="https://github.com/user-attachments/assets/1b5563aa-d417-40a8-90b9-f577b0f84cbd" />
-
-
----
-
-## 8. Analysis & Metrics
-
-<!--
-  Explain what you measured and how - before you share what you found.
-
-  WHAT GOOD LOOKS LIKE:
-  Metric: "Customer Return Rate"
-  Definition: "Number of transactions flagged as returns divided by total
-               transactions, calculated at product-category and regional grain."
-  Why It Matters: "Return rate - not sales volume - was hypothesised to
-                  explain regional revenue gaps. This metric tests that hypothesis."
-
-  WHAT TO AVOID:
-  ❌ Defining a metric only in code: SUM(returns) / COUNT(transaction_id)
-     That's an implementation. Write the plain-language definition here.
-     Both belong in your project - the definition in the README,
-     the implementation in the code.
--->
-
 ### Analytical Approach
 
 [Describe how you approached the analysis. Were you exploring patterns? Testing a hypothesis? Building and validating a pipeline? Be honest about your method - exploratory work is valid, just call it that.]
