@@ -10,19 +10,11 @@
 ---
 
 ## Table of Contents
-1. [Objectives](#2-objectives)
-2. [Project Tools](#3-project-scope--tools)
-4. [Repository Structure](#4-repository-structure)
-5. [Data Workflow](#5-data-workflow)
-6. [Data Model & Schema](#6-data-model--schema)
-7. [ERD - Entity Relationship Diagram](#7-erd--entity-relationship-diagram) *(SQL projects)*
-8. [Analysis & Metrics](#8-analysis--metrics)
-9. [Key Insights](#9-key-insights)
-10. [Recommendations](#10-recommendations)
-11. [Assumptions & Limitations](#11-assumptions--limitations)
-12. [Future Enhancements](#12-future-enhancements)
-13. [Deliverables](#13-deliverables)
-14. [Author](#14-author)
+1. [Objectives](#1-objectives)
+2. [Project Tools](#2-project-scope--tools)
+3. [Data Model & Schema](#3-data-model--schema)
+4. [Analysis & Metrics](#4-analysis--metrics)
+5. [Author](#5-author)
 
 ---
 
@@ -138,7 +130,7 @@
 ---
 
 
-## Analysis & Metrics
+## 4. Analysis & Metrics
 ---
 ### Analytical Approach
 
@@ -163,7 +155,7 @@
 
 ---
 
-## 14. Author
+## 5. Author
 
 **[Juan Arredondo]**
 
