@@ -1,5 +1,4 @@
 -- Looking for card popularity for people under 50 and over 50
--- Using joins, window function, conditional expression, and aggregates
   
 SELECT
     CASE
