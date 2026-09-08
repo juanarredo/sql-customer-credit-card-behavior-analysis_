@@ -1,6 +1,5 @@
 
 -- Customer spending and balance metrics by age
--- Using Joins, CTE, and Aggregates 
 
 WITH spending_behavior AS (
 	SELECT 
