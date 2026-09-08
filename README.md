@@ -134,6 +134,6 @@
 
 - 🔗 [[LinkedIn URL](linkedin.com/in/juan-arredondo-649b15429)]
 - 💼 [[GitHub profile URL](https://github.com/juanarredo)]
-- 📧 [[Email](juanarrofficial@gmail.com)]
+- 📧 [juanarrofficial@gmail.com]
 
 ---
