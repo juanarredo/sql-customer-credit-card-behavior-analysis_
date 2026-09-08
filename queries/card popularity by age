@@ -1,0 +1,28 @@
+-- Looking for card popularity for people under 50 and over 50
+-- Using joins, window function, conditional expression, and aggregates
+  
+SELECT
+    CASE
+        WHEN i.age < 50 THEN 'Under 50'
+        ELSE '50 and Over'
+    END AS age_group,
+    t.card_type,
+    COUNT(*) AS number_of_customers,
+    ROW_NUMBER() OVER (
+        PARTITION BY 
+            CASE
+                WHEN i.age < 50 THEN 'Under 50'
+                ELSE '50 and Over'
+            END
+        ORDER BY COUNT(*) DESC
+    ) AS card_popularity
+FROM ccc_type t
+JOIN ccc_info i
+    ON t.customer_id = i.customer_id
+GROUP BY
+    CASE
+        WHEN i.age < 50 THEN 'Under 50'
+        ELSE '50 and Over'
+    END,
+    t.card_type
+ORDER BY age_group, card_popularity;
