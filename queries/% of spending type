@@ -1,0 +1,30 @@
+-- The percentage of essintial vs nonessential spending
+    
+WITH spending AS (
+    SELECT
+        customer_id,
+        grocery_spending +
+        fuel_spending +
+        utility_spending AS essential_spending,
+        
+        online_shopping +
+        dining_spending +
+        travel_spending +
+        entertainment_spending AS nonessential_spending
+    FROM ccc_behavior
+)
+
+SELECT
+    ROUND(SUM(essential_spending), 2) AS total_essential_spending,
+    ROUND(SUM(nonessential_spending), 2) AS total_nonessential_spending,
+    ROUND(
+        SUM(essential_spending) /
+        NULLIF(SUM(essential_spending + nonessential_spending), 0) * 100,
+        2
+    ) AS essential_percentage,
+    ROUND(
+        SUM(nonessential_spending) /
+        NULLIF(SUM(essential_spending + nonessential_spending), 0) * 100,
+        2
+    ) AS nonessential_percentage
+FROM spending;
