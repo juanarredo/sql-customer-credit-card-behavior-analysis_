@@ -80,7 +80,7 @@
      if a formal schema doesn't apply. Even one paragraph is more helpful than nothing.
 -->
 
-### Dataset / Table: `[ccc_info]`
+### Table: `[ccc_info]`
 
 | Field Name | Data Type | Description | 
 |------------|-----------|-------------|
@@ -93,7 +93,7 @@
 | `[occupation]` | [varchar(50)] | [customers occupation] |
 
 
-### Dataset / Table: `[ccc_balance]`
+### Table: `[ccc_balance]`
 
 | Field Name | Data Type | Description | 
 |------------|-----------|-------------|
@@ -102,7 +102,7 @@
 | `[statement_balance]` | [decimal(8, 2)] | [customers statement balance] | 
 | `[payment_amount]` | [decimal(8, 2)] | [customers payment amount] | 
 
-### Dataset / Table: `[ccc_type]`
+### Table: `[ccc_type]`
 
 | Field Name | Data Type | Description | 
 |------------|-----------|-------------|
@@ -111,7 +111,7 @@
 | `[credit_limit]` | [int] | [customers credit limit] | 
 | `[card_age]` | [int] | [how long the customer has had the credit card] |
 
-### Dataset / Table: `[ccc_behavior]`
+### Table: `[ccc_behavior]`
 
 | Field Name | Data Type | Description | 
 |------------|-----------|-------------|
