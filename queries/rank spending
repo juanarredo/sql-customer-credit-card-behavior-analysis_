@@ -1,0 +1,16 @@
+-- Ranking customers by spending within their age groups
+
+SELECT
+    i.age,
+    i.customer_id,
+    i.first_name,
+    i.last_name,
+    b.monthly_spending,
+    RANK() OVER (
+        PARTITION BY i.age
+        ORDER BY b.monthly_spending DESC
+    ) AS spending_rank
+FROM ccc_info i
+JOIN ccc_behavior b
+    ON i.customer_id = b.customer_id
+ORDER BY i.age, spending_rank;
