@@ -132,7 +132,7 @@
 
 **[Juan Arredondo]**
 
-- 🔗 [[LinkedIn URL](linkedin.com/in/juan-arredondo-649b15429)]
+- 🔗 [[LinkedIn URL]([linkedin.com/in/juan-arredondo-649b15429](https://www.linkedin.com/in/juan-arredondo-649b15429/))]
 - 💼 [[GitHub profile URL](https://github.com/juanarredo)]
 - 📧 [juanarrofficial@gmail.com]
 
