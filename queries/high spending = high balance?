@@ -1,0 +1,26 @@
+-- Do customers with higher monthly spending have higher outstanding credit card balances
+
+WITH spending_behavior AS (
+	SELECT 
+		customer_id,
+		monthly_spending,
+		CASE 
+			WHEN monthly_spending < 1000 THEN 'Low Spender'
+			WHEN monthly_spending BETWEEN 1000 AND 3000 THEN 'Medium Spender'
+            ELSE 'High Spender'
+		END AS spending_category 
+	FROM ccc_behavior
+)
+
+SELECT 
+    s.spending_category,
+    COUNT(DISTINCT i.customer_id) AS customer_count,
+    ROUND(AVG(b.outstanding_balance), 2) AS avg_outstanding_balance, 
+    ROUND(AVG(b.statement_balance), 2) AS avg_statement_balance
+FROM spending_behavior s
+JOIN ccc_info i
+	ON s.customer_id = i.customer_id
+JOIN ccc_balance b
+	ON i.customer_id = b.customer_id
+GROUP BY s.spending_category
+ORDER BY avg_outstanding_balance DESC
