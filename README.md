@@ -13,8 +13,7 @@
 1. [Objectives](#1-objectives)
 2. [Project Tools](#2-project-scope--tools)
 3. [Data Model & Schema](#3-data-model--schema)
-4. [Analysis & Metrics](#4-analysis--metrics)
-5. [Author](#5-author)
+4. [Author](#5-author)
 
 ---
 
@@ -126,32 +125,6 @@
 | `[travel_spending]` | [decimal(8,2)] | [customers travel spending] | 
 | `[entertainment_spending]` | [decimal(8,2)] | [customers entertainment spending] | 
 | `[utility_spending]` | [decimal(8,2)] | [customers utility spending] | 
-
----
-
-
-## 4. Analysis & Metrics
----
-### Analytical Approach
-
-[Describe how you approached the analysis. Were you exploring patterns? Testing a hypothesis? Building and validating a pipeline? Be honest about your method - exploratory work is valid, just call it that.]
-
-### Key Metrics Defined
-
-| Metric | Plain-Language Definition | Why It Matters |
-|--------|--------------------------|----------------|
-| `[Metric 1]` | [What it measures, in one sentence] | [What decision or question it answers] |
-| `[Metric 2]` | [What it measures, in one sentence] | [What decision or question it answers] |
-| `[Metric 3]` | [What it measures, in one sentence] | [What decision or question it answers] |
-
-### Methods Used
-
-- [e.g., Descriptive statistics - distribution, central tendency, outlier detection]
-- [e.g., Trend analysis across [time period]]
-- [e.g., Segmentation / group comparison by [dimension]]
-- [e.g., Correlation analysis between [variable A] and [variable B]]
-- [e.g., SQL window functions for [specific aggregation]]
-- [e.g., Custom aggregation or transformation logic in [tool]]
 
 ---
 
