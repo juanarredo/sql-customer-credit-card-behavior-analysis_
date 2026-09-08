@@ -150,50 +150,8 @@
 
 Mermaid Diagram
 ```mermaid
-erDiagram
-    ccc_info {
-        int customer_id PK
-        varchar(50) first_name 
-        varchar(50) last_name 
-        int age
-        int credit_score
-        decimal(8, 2) annual_income
-        varchar(50) occupation
-    }
-    ccc_type {
-        int customer_id PK
-        varchar(50) card_type
-        int credit_limit
-        int card_age
-    }
-    ccc_balance {
-        int customer_id PK
-        decimal(8,2) outstanding_balance
-        decimal(8,2) statement_balance
-        decimal(8,2) statement_balance
-    }
-    ccc_behavior {
-        int customer_id PK
-        int monthly_transactions
-        decimal(8,2) monthly_spending
-        decimal(8,2) online_shopping
-        decimal(8,2) grocery_spending
-        decimal(8,2) fuel_spending
-        decimal(8,2) dining_spending
-        decimal(8,2) travel_spending
-        decimal(8,2) entertainment_spending
-        decimal(8,2) utility_spending
-    }
-    ORDERS ||--o{ CUSTOMERS : "placed by"
-    ORDERS ||--o{ PRODUCTS : "contains"
+<img width="697" height="869" alt="ccc sql" src="https://github.com/user-attachments/assets/1b5563aa-d417-40a8-90b9-f577b0f84cbd" />
 
----
-
-**Table Relationships Summary:**
-
-| Relationship | Join Key | Type |
-|-------------|----------|------|
-| `ccc_info` → `ccc_type` → `ccc_balance` → `ccc_behavior` | `customer_id` | 
 
 ---
 
