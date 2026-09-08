@@ -1,0 +1,28 @@
+
+-- Customer spending and balance metrics by age
+-- Using Joins, CTE, and Aggregates 
+
+WITH spending_behavior AS (
+	SELECT 
+		customer_id,
+		monthly_spending,
+        monthly_transactions,
+        monthly_spending / NULLIF(monthly_transactions, 0) AS avg_transaction_amount
+	FROM ccc_behavior
+)
+
+SELECT 
+    COUNT(i.age) AS num_in_age,
+    i.age,
+    ROUND(AVG(b.outstanding_balance), 2) AS avg_balance, 
+    ROUND(AVG(b.statement_balance), 2) AS avg_statement_balance,
+    ROUND(AVG(sb.monthly_spending), 2) AS avg_monthly_spending,
+    ROUND(AVG(sb.monthly_transactions), 2) AS avg_monthly_transactions,
+    ROUND(AVG(sb.avg_transaction_amount), 2) AS avg_tansaction_amount
+FROM ccc_balance b
+JOIN ccc_info i
+	ON b.customer_id = i.customer_id
+JOIN spending_behavior sbccc_info
+	ON i.customer_id = sb.customer_id
+GROUP BY i.age 
+ORDER BY i.age ASC
