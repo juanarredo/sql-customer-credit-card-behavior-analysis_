@@ -128,12 +128,12 @@
 
 ---
 
-## 5. Author
+## 4. Author
 
 **[Juan Arredondo]**
 
-- 🔗 [LinkedIn URL]
-- 💼 [Portfolio or GitHub profile URL]
-- 📧 [juanarrofficial@gmail.com]
+- 🔗 [[LinkedIn URL](linkedin.com/in/juan-arredondo-649b15429)]
+- 💼 [[GitHub profile URL](https://github.com/juanarredo)]
+- 📧 [[Email](juanarrofficial@gmail.com)]
 
 ---
