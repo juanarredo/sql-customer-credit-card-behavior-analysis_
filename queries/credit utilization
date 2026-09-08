@@ -1,0 +1,19 @@
+-- Customer credit utilization 
+    
+SELECT
+    i.customer_id,
+    i.first_name,
+    i.last_name,
+    t.card_type,
+    t.credit_limit,
+    b.outstanding_balance,
+    ROUND(
+        b.outstanding_balance / NULLIF(t.credit_limit, 0) * 100,
+        2
+    ) AS credit_utilization
+FROM ccc_info i
+JOIN ccc_type t
+    ON i.customer_id = t.customer_id
+JOIN ccc_balance b
+    ON i.customer_id = b.customer_id
+ORDER BY credit_utilization DESC;
